@@ -12,7 +12,7 @@ int main()
 	mysql_library_init(0, NULL, NULL);
 
 	MySQLErrInfo error_;
-	MySQLFoundationWrapper mysql1(5, 20, "localhost", "root", "root942612", 3306);
+	MySQLFoundationWrapper mysql1(5, 20, "localhost", "root", "root", 3306);
 	if(mysql1.is_connection_){}
 	else
 		error_ = mysql1.start();
