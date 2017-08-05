@@ -15,18 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\mysql_c_api_foundation.h">
+    <ClInclude Include="..\mysql_c_api_data.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\mysql_c_api_error.h">
+    <ClInclude Include="..\mysql_c_api_foundation.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\mysql_c_api_foundation.cxx">
+    <ClCompile Include="..\mysql_c_api_data.cxx">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="main_test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mysql_c_api_foundation.cxx">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

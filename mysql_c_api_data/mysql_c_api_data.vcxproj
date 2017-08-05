@@ -10,19 +10,10 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\mysql_c_api_foundation.h" />
-    <ClInclude Include="..\mysql_c_api_error.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\mysql_c_api_foundation.cxx" />
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6F1E8E26-9722-4CDD-ACD9-6A66F6AAD57A}</ProjectGuid>
+    <ProjectGuid>{BA045431-6A46-4088-B8BF-28C91BB238D0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>mysql_c_api_wrapper</RootNamespace>
-    <ProjectName>mysql_c_api_foundation</ProjectName>
+    <RootNamespace>mysql_c_api_data</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -72,7 +63,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <Optimization>Disabled</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -86,6 +77,15 @@
       <AdditionalLibraryDirectories>E:\Program Files (x86)\MySQL\MySQL Server 5.0\lib\opt;G:\BOOST\lib_vs2012;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\mysql_c_api_data.h" />
+    <ClInclude Include="..\mysql_c_api_foundation.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\mysql_c_api_data.cxx" />
+    <ClCompile Include="..\mysql_c_api_foundation.cxx" />
+    <ClCompile Include="main_test.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

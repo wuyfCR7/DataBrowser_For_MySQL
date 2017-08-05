@@ -9,22 +9,13 @@
 #ifdef _MSC_VER > 1000
 #pragma once
 #endif
-#include <WinSock2.h>
-#include <mysql.h>
-#include <string>
+#include <mysql_c_api_error.h>
 #include <boost\bind.hpp>
 #include <boost\asio.hpp>
 #include <boost\thread.hpp>
 #include <boost\smart_ptr.hpp>
 #include <boost\noncopyable.hpp>
 
-
-struct MySQLErrInfo{
-	unsigned int error_no_;
-	std::string error_info_;
-	MySQLErrInfo() :error_no_(0), error_info_(""){}
-	~MySQLErrInfo(){}
-};
 
 
 class MySQLFoundationWrapper:public boost::noncopyable{
@@ -47,8 +38,10 @@ private:
 	MYSQL mysql_;
 	char reconnect_value_;
 
-	/// disconnect
+	/// connection information
 	bool disconnect_;
+public:
+	bool is_connection_;
 private:
 
 	MySQLErrInfo connect(); 

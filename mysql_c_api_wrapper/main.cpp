@@ -11,6 +11,9 @@ int main()
 
 	MySQLFoundationWrapper mysql1(5, 15, "localhost", "root", "root942612", 3307);
 	MySQLErrInfo error_ = mysql1.start();
+	if(mysql1.is_connection_){}
+	else
+		error_ = mysql1.start();
 
 	if(error_.error_no_ == 0)
 	{
@@ -69,6 +72,7 @@ MySQLErrInfo print(MYSQL* mysql_){
 		std::cout << "<" << fields_[i].name << ">" << " ";
 	std::cout << std::endl;
 	MYSQL_ROW row_ = NULL;
+	std::cout << "row_count\t" << res_->row_count << std::endl;
 	while ((row_ = mysql_fetch_row(res_))){
 		for (int t = 0; t < fields_num_; ++t){
 			if (row_[t] == NULL)

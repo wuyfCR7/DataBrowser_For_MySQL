@@ -16,7 +16,8 @@ MySQLFoundationWrapper::MySQLFoundationWrapper(
 	port_(port__),
 	timer_(service_, boost::posix_time::seconds(timer_interval_seconds_)),
 	reconnect_value_(1),
-	disconnect_(false)
+	disconnect_(false),
+	is_connection_(false)
 {
 }
 
@@ -80,6 +81,7 @@ MySQLErrInfo MySQLFoundationWrapper::start()
 		if(ios_running_thread_.get() == NULL){
 			ios_running_thread_.reset(new boost::thread(boost::bind(&boost::asio::io_service::run, &service_)));
 		}
+		is_connection_ = true;
 	}
 	return err_;
 }
@@ -93,10 +95,12 @@ void MySQLFoundationWrapper::ping_timer_callback(const boost::system::error_code
 		int ping_ = mysql_ping(&mysql_);
 		if(ping_ == 0){}
 		else{
-			connect();
+			is_connection_ = false;
+			MySQLErrInfo err_ = connect();
+			if(err_.error_no_ == 0)
+				is_connection_ = true;
 		}
 		mysql_thread_end();
-		std::cout << boost::this_thread::get_id() << "\tping timer callback running" << std::endl;
 		timer_.expires_from_now(boost::posix_time::seconds(timer_interval_seconds_));
 		timer_.async_wait(boost::bind(&MySQLFoundationWrapper::ping_timer_callback, this, boost::asio::placeholders::error));
 	}
@@ -113,6 +117,7 @@ void MySQLFoundationWrapper::wait()
 	else{
 		ios_running_thread_->join();
 		ios_running_thread_.reset();
+		mysql_close(&mysql_);
 	}
 }
 
