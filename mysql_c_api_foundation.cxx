@@ -118,6 +118,7 @@ void MySQLFoundationWrapper::wait()
 		ios_running_thread_->join();
 		ios_running_thread_.reset();
 		mysql_close(&mysql_);
+		is_connection_ = false;
 	}
 }
 
