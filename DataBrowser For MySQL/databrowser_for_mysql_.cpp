@@ -12,6 +12,8 @@
 #pragma comment(lib, "libboost_system-vc110-mt-1_58.lib")
 int main()
 {
+	mysql_library_init(0, NULL, NULL);
+
 	UIDataBrowserForMySQL::GetInstance().OnInitizeDialog();
 	UIDataBrowserForMySQL::GetInstance().OnInitizeCallBack();
 	UIDataBrowserForMySQL::GetInstance().show();
@@ -25,5 +27,6 @@ int main()
 	UIDataBrowserForMySQL::GetInstance().mysql_manager_.export_xml(filename_);
 	UIDataBrowserForMySQL::GetInstance().join();
 
+	mysql_library_end();
 	return NULL;
 }
