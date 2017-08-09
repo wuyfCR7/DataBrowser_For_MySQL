@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Client>
+	<Connector>
+		<host_>localhost</host_>
+		<user_>root</user_>
+		<password_>root942612</password_>
+		<port_>3306</port_>
+	</Connector>
+	<Connector>
+		<host_>localhost</host_>
+		<user_>root</user_>
+		<password_>root942612</password_>
+		<port_>3307</port_>
+	</Connector>
+</Client>

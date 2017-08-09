@@ -1,6 +1,5 @@
 #include "UIConnectorInfo.h"
 
-
 UIConnectorInfo::UIConnectorInfo():
 	host_(""),
 	user_(""),
@@ -12,8 +11,7 @@ UIConnectorInfo::UIConnectorInfo():
 	input_host_(NULL),
 	input_user_(NULL),
 	input_password_(NULL),
-	input_port_(NULL),
-	is_info_prepared_(false)
+	input_port_(NULL)
 {
 
 }
@@ -60,8 +58,6 @@ void UIConnectorInfo::OnInitizeDialog()
 	input_password_->textfont(FL_COURIER_BOLD);
 	input_port_->textfont(FL_COURIER_BOLD);
 
-	button_return_->callback(return_callback, this);
-	button_cancel_->callback(cancel_callback, this);
 	button_return_->color(FL_BLACK);
 	button_return_->labelcolor(FL_GREEN);
 	button_cancel_->color(FL_BLACK);
@@ -87,23 +83,9 @@ void UIConnectorInfo::hide()
 	input_user_->value("");
 	input_password_->value("");
 	input_port_->value("");
-	is_info_prepared_ = true;
 }
 
 void UIConnectorInfo::leave()
 {
 	window_->hide();
-	is_info_prepared_ = false;
-}
-
-void UIConnectorInfo::return_callback(Fl_Widget*, void* param_)
-{
-	UIConnectorInfo* ui_ = (UIConnectorInfo*)param_;
-	ui_->hide();
-}
-
-void UIConnectorInfo::cancel_callback(Fl_Widget*, void* param_)
-{
-	UIConnectorInfo* ui_ = (UIConnectorInfo*)param_;
-	ui_->leave();
 }

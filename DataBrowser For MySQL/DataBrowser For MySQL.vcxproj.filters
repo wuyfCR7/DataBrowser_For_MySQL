@@ -36,6 +36,9 @@
     <ClInclude Include="UIConnectorInfo.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="UITreeIcon.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\mysql_c_api_data.cxx">
@@ -57,6 +60,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="UIConnectorInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UITreeIcon.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

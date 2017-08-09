@@ -1,9 +1,8 @@
 #include "MySQLClientManager.h"
-#include "mysql_c_api_data.h"
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/filesystem.hpp>
-
+#include "mysql_c_api_data.h"
 
 /// MySQLConnectorInfo
 std::string MySQLConnectorInfo::connector_name() const
@@ -181,6 +180,11 @@ MySQLErrInfo MySQLClientManager::add(
 	auto iter_ = mysql_conn_manager_.begin();
 	while(iter_ != mysql_conn_manager_.end())
 	{
+		if((*iter_).get() == NULL)
+		{
+			++iter_;
+			continue;
+		}
 		if((*iter_)->connector_name_ == connector_name_)
 		{
 			error_.error_info_ = "Connector Already Exist";
@@ -205,6 +209,11 @@ MySQLErrInfo MySQLClientManager::connect(std::string connector_name_)
 	auto iter_ = mysql_conn_manager_.begin();
 	while(iter_ != mysql_conn_manager_.end())
 	{
+		if((*iter_).get() == NULL)
+		{
+			++iter_;
+			continue;
+		}
 		if((*iter_)->connector_name_ == connector_name_)
 		{
 			error_ = (*iter_)->start();
@@ -214,10 +223,13 @@ MySQLErrInfo MySQLClientManager::connect(std::string connector_name_)
 		}
 		++iter_;
 	}
+	return error_;
 }
 
 void MySQLClientManager::rm()
 {
+	if(mysql_conn_manager_.empty())
+		return;
 	ThreadPtr thread_(new boost::thread(remove_connectorptrs_treatment, mysql_conn_manager_));
 	thread_manager_.push_back(thread_);
 	mysql_conn_manager_.clear();
@@ -228,12 +240,22 @@ void MySQLClientManager::remove_connectorptrs_treatment(std::vector<MySQLConnect
 	auto iter_ = mysql_conn_manager_.begin();
 	while(iter_ != mysql_conn_manager_.end())
 	{
+		if((*iter_).get() == NULL)
+		{
+			++iter_;
+			continue;
+		}
 		(*iter_)->end();
 		++iter_;
 	}
 	iter_ = mysql_conn_manager_.begin();
 	while(iter_ != mysql_conn_manager_.end())
 	{
+		if((*iter_).get() == NULL)
+		{
+			++iter_;
+			continue;
+		}
 		(*iter_)->wait();
 		++iter_;
 	}
@@ -244,11 +266,16 @@ void MySQLClientManager::rm(std::string connector_name_)
 	auto iter_ = mysql_conn_manager_.begin();
 	while(iter_ != mysql_conn_manager_.end())
 	{
+		if((*iter_).get() == NULL)
+		{
+			++iter_;
+			continue;
+		}
 		if((*iter_)->connector_name_ == connector_name_)
 		{
-			mysql_conn_manager_.erase(iter_);
-			ThreadPtr thread_(new boost::thread(remove_connectorptr_treatment, (*iter_)));
+			ThreadPtr thread_(new boost::thread(remove_connectorptr_treatment, *iter_));
 			thread_manager_.push_back(thread_);
+			mysql_conn_manager_.erase(iter_);
 			break;
 		}
 		++iter_;
@@ -266,6 +293,11 @@ void MySQLClientManager::end()
 	auto iter_ = mysql_conn_manager_.begin();
 	while(iter_ != mysql_conn_manager_.end())
 	{
+		if((*iter_).get() == NULL)
+		{
+			++iter_;
+			continue;
+		}
 		(*iter_)->end();
 		++iter_;
 	}
@@ -282,6 +314,11 @@ void MySQLClientManager::wait()
 	auto conn_iter_ = mysql_conn_manager_.begin();
 	while(conn_iter_ != mysql_conn_manager_.end())
 	{
+		if((*conn_iter_).get() == NULL)
+		{
+			++conn_iter_;
+			continue;
+		}
 		(*conn_iter_)->wait();
 		++conn_iter_;
 	}
@@ -292,6 +329,11 @@ void MySQLClientManager::UpdateDataBaseInfo(std::string connector_name_)
 	auto iter_ = mysql_conn_manager_.begin();
 	while(iter_ != mysql_conn_manager_.end())
 	{
+		if((*iter_).get() == NULL)
+		{
+			++iter_;
+			continue;
+		}
 		if((*iter_)->connector_name_ == connector_name_)
 		{
 			(*iter_)->UpdateDataBaseInfo();
@@ -306,6 +348,11 @@ void MySQLClientManager::UpdateDataBaseInfo()
 	auto iter_ = mysql_conn_manager_.begin();
 	while(iter_ != mysql_conn_manager_.end())
 	{
+		if((*iter_).get() == NULL)
+		{
+			++iter_;
+			continue;
+		}
 		(*iter_)->UpdateDataBaseInfo();
 		++iter_;
 	}
@@ -317,6 +364,11 @@ MYSQL* MySQLClientManager::getMySQL(std::string connector_name_)
 	auto iter_ = mysql_conn_manager_.begin();
 	while(iter_ != mysql_conn_manager_.end())
 	{
+		if((*iter_).get() == NULL)
+		{
+			++iter_;
+			continue;
+		}
 		if((*iter_)->connector_name_ == connector_name_)
 		{
 			mysql_ = (*iter_)->getMySQL();
@@ -329,6 +381,8 @@ MYSQL* MySQLClientManager::getMySQL(std::string connector_name_)
 
 void MySQLClientManager::export_xml(const char* filename_)
 {
+	if(mysql_conn_manager_.empty())
+		return;
 	std::string xml_file_ = filename_;
 	if(boost::filesystem::exists(xml_file_))
 		boost::filesystem::remove(xml_file_);
@@ -337,6 +391,11 @@ void MySQLClientManager::export_xml(const char* filename_)
 	auto iter_ = mysql_conn_manager_.begin();
 	while(iter_ != mysql_conn_manager_.end())
 	{
+		if((*iter_).get() == NULL)
+		{
+			++iter_;
+			continue;
+		}
 		boost::property_tree::ptree child_pt;
 		child_pt.put("host_",     (*iter_)->connector_info_.host_);
 		child_pt.put("user_",     (*iter_)->connector_info_.user_);

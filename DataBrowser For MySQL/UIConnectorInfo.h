@@ -7,7 +7,7 @@
 #ifdef _MSC_VER > 1000
 #pragma once
 #endif
-#include <FL\Fl.H>
+#include "MySQLClientManager.h"
 #include <FL\Fl_Window.H>
 #include <FL\Fl_Button.H>
 #include <FL\Fl_Input.H>
@@ -25,8 +25,8 @@ public:
 	std::string user_;
 	std::string password_;
 	unsigned int port_;
-	bool is_info_prepared_;
-private:
+	MySQLClientManager* mysql_manager_ptr_;
+public:
 	Fl_Window*    window_;
 	Fl_Button*    button_return_;
 	Fl_Button*    button_cancel_;
@@ -44,8 +44,6 @@ public:
 	void leave();
 
 	static UIConnectorInfo& GetInstance();
-	static void return_callback(Fl_Widget*, void*);
-	static void cancel_callback(Fl_Widget*, void*);
 };
 
 

@@ -9,7 +9,6 @@
 #endif
 #include "mysql_c_api_foundation.h"
 
-
 /// MySQLConnectorInfo
 struct MySQLConnectorInfo
 {

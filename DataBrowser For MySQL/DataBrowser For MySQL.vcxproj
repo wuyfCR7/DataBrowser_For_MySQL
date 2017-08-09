@@ -85,6 +85,7 @@
     <ClInclude Include="MySQLClientManager.h" />
     <ClInclude Include="UIConnectorInfo.h" />
     <ClInclude Include="UIDataBrowser.h" />
+    <ClInclude Include="UITreeIcon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\mysql_c_api_data.cxx" />
@@ -94,6 +95,7 @@
     <ClCompile Include="MySQLClientManager.cpp" />
     <ClCompile Include="UIConnectorInfo.cpp" />
     <ClCompile Include="UIDataBrowser.cpp" />
+    <ClCompile Include="UITreeIcon.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

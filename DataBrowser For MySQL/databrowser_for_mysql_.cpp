@@ -1,23 +1,29 @@
-#include "UIConnectorInfo.h"
+/*
+ * This is Data Browser For MySQL main program 
+ * By WuyfCR7
+*/
+#include "UIDataBrowser.h"
 #include <iostream>
+#include <FL\Fl.H>
+#pragma comment(lib, "fltk.lib")
 #pragma comment(lib, "libmysql.lib")
 #pragma comment(lib, "libboost_thread-vc110-mt-1_58.lib")
 #pragma comment(lib, "libboost_date_time-vc110-mt-1_58.lib")
 #pragma comment(lib, "libboost_system-vc110-mt-1_58.lib")
-#pragma comment(lib, "fltk.lib")
-#pragma comment(lib, "fltkforms.lib")
 int main()
 {
-	UIConnectorInfo::GetInstance().OnInitizeDialog();
-	UIConnectorInfo::GetInstance().show();
+	UIDataBrowserForMySQL::GetInstance().OnInitizeDialog();
+	UIDataBrowserForMySQL::GetInstance().OnInitizeCallBack();
+	UIDataBrowserForMySQL::GetInstance().show();
+
+	const char* filename_ = "config.xml";
+	UIDataBrowserForMySQL::GetInstance().mysql_manager_.import_xml(filename_);
+	tool_update_tree_all_items(&UIDataBrowserForMySQL::GetInstance(), false);
 
 	Fl::run();
 
-	std::string host_ = UIConnectorInfo::GetInstance().host_;
-	std::string user_ = UIConnectorInfo::GetInstance().user_;
-	std::string password_ = UIConnectorInfo::GetInstance().password_;
-	unsigned int port_ = UIConnectorInfo::GetInstance().port_;	
-	bool res_ = UIConnectorInfo::GetInstance().is_info_prepared_;
+	UIDataBrowserForMySQL::GetInstance().mysql_manager_.export_xml(filename_);
+	UIDataBrowserForMySQL::GetInstance().join();
 
 	return NULL;
 }
