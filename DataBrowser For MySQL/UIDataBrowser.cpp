@@ -4,6 +4,7 @@
 
 Fl_Pixmap PIXMAP_HAS_CHILDREN(ICON_TAG_PARENT);
 Fl_Pixmap PIXMAP_NONE_CHILDREN(ICON_TAG_CHILD);
+Fl_Pixmap PIXMAP_WINDOW(ICON_WINDOW);
 
 UIDataBrowserForMySQL::UIDataBrowserForMySQL():
 	window_(NULL),
@@ -125,9 +126,13 @@ void UIDataBrowserForMySQL::OnInitizeCallBack()
 
 void UIDataBrowserForMySQL::show()
 {
+	static Fl_RGB_Image IMAGE_WINDOW(&PIXMAP_WINDOW, FL_WHITE);
 	if(window_ == NULL){}
-	else 
+	else
+	{
+		window_->default_icon(&IMAGE_WINDOW);
 		window_->show();
+	} 		
 }
 
 void UIDataBrowserForMySQL::join()
