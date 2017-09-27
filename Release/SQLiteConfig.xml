@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SQLite3Config>
+	<DBPath>G:\MYDRIVERSFILE\MyDriversSQLite\Detection\test.db</DBPath>
+	<DBPath>G:/MYDRIVERSFILE/MyDriversSQLite/Detection/opt2.DB</DBPath>
+	<DBPath>G:/MYDRIVERSFILE/MyDriversSQLite/Detection/opt.DB</DBPath>
+	<DBPath>G:\Program Files\SQLite3\test.db</DBPath>
+	<DBPath>G:/MYDRIVERSFILE/MyDriversSQLite/Detection/UFXDemo.VC.db</DBPath>
+</SQLite3Config>

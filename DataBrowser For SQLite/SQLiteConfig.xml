@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SQLite3Config>
+	<DBPath>G:\MYDRIVERSFILE\MyDriversSQLite\Detection\opt.db</DBPath>
+	<DBPath>G:\MYDRIVERSFILE\MyDriversSQLite\Detection\opt2.db</DBPath>
+	<DBPath>G:\MYDRIVERSFILE\MyDriversSQLite\Detection\RJCommonLib.db</DBPath>
+	<DBPath>G:\MYDRIVERSFILE\MyDriversSQLite\Detection\test.db</DBPath>
+	<DBPath>G:\MYDRIVERSFILE\MyDriversSQLite\Detection\toc.db</DBPath>
+	<DBPath>G:\MYDRIVERSFILE\MyDriversSQLite\Detection\UFXDemo.VC.db</DBPath>
+</SQLite3Config>

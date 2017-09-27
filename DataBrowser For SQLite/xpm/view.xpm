@@ -1,0 +1,24 @@
+/* XPM */
+static const char *view_xpm[] = {
+/* columns rows colors chars-per-pixel */
+"14 16 2 1",
+"  c Black",
+". c None",
+/* pixels */
+"            ..",
+"             .",
+"             .",
+"   ..        .",
+"   ..        .",
+"   ..        .",
+"   ..         ",
+"   ....       ",
+"   ...        ",
+"   ...        ",
+"   ...        ",
+"              ",
+"              ",
+"              ",
+"              ",
+"              "
+};
